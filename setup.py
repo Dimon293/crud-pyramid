@@ -1,5 +1,3 @@
-import os
-
 from setuptools import setup, find_packages
 
 
@@ -15,6 +13,7 @@ requires = [
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
+    'psycopg2',
 ]
 
 tests_require = [
@@ -24,9 +23,9 @@ tests_require = [
 ]
 
 setup(
-    name='cc_starter',
+    name='CRUD_Pyramid',
     version='0.0',
-    description='cc_starter',
+    description='CRUD_Pyramid',
     classifiers=[
         'Programming Language :: Python',
         'Framework :: Pyramid',
@@ -46,10 +45,10 @@ setup(
     install_requires=requires,
     entry_points={
         'paste.app_factory': [
-            'main = cc_starter:main',
+            'main = CRUD_Pyramid:main',
         ],
         'console_scripts': [
-            'initialize_cc_starter_db=cc_starter.scripts.initialize_db:main',
+            'initialize_CRUD_Pyramid_db=CRUD_Pyramid.scripts.initialize_db:main',
         ],
     },
 )
