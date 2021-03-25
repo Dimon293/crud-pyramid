@@ -9,7 +9,7 @@ from .. import models
 
 def setup_models(dbsession):
     """
-    Add or update models / fixtures in the database.
+    Add or update models.py / fixtures in the database.
 
     """
     model = models.user.User(name='one', value=1)

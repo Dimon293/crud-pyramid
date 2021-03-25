@@ -1,7 +1,12 @@
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, scoped_session
 
-from cc_starter.models.meta import db_session, Base
+
+Base = declarative_base()
+
+db_session = scoped_session(sessionmaker())
 
 
 def main(global_config, **settings):
@@ -12,7 +17,9 @@ def main(global_config, **settings):
     Base.metadata.bind = engine
 
     with Configurator(settings=settings) as config:
+        config.include('.user')
         config.include('.routes')
-        config.include('.models')
-        config.scan('.views')
+        # config.scan('.user.views')
+        config.scan('.user') # так предпочтительнее или как закоменчено?
+        # я предполагаю, что так, потому что каждый файл геморно сканить
     return config.make_wsgi_app()

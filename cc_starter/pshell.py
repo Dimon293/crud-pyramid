@@ -10,4 +10,4 @@ def setup(env):
     # inject some vars into the shell builtins
     env['tm'] = request.tm
     env['dbsession'] = request.dbsession
-    env['models'] = models
+    env['models.py'] = models

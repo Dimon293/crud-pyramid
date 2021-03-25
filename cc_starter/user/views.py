@@ -2,7 +2,7 @@ from pyramid.exceptions import NotFound
 from pyramid.view import view_config, view_defaults
 
 from .. import db_session
-from ..models import User
+from .models import User
 
 
 @view_defaults(renderer='json')

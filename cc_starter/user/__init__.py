@@ -3,11 +3,11 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import configure_mappers
 import zope.sqlalchemy
 
-# Import or define all models here to ensure they are attached to the
+# Import or define all models.py here to ensure they are attached to the
 # ``Base.metadata`` prior to any initialization routines.
-from .user import User  # flake8: noqa
+from .models import User  # flake8: noqa
 
-# Run ``configure_mappers`` after defining all of the models to ensure
+# Run ``configure_mappers`` after defining all of the models.py to ensure
 # all relationships can be setup.
 configure_mappers()
 
@@ -88,7 +88,7 @@ def includeme(config):
     """
     Initialize the model for a Pyramid app.
 
-    Activate this setup using ``config.include('sqla_demo.models')``.
+    Activate this setup using ``config.include('sqla_demo.models.py')``.
 
     """
     settings = config.get_settings()
