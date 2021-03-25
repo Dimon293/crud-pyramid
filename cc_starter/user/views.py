@@ -15,21 +15,16 @@ class UserViews:
     def get_users(self):
         users = db_session.query(User).all()
         # return [user.to_json() for user in users]
-        return list(map(lambda user: user.to_json(), users))
+        return list(map(lambda user: user, users))
 
     @view_config(request_method='GET', route_name='user')
     def get_user(self):
-        if 'id' not in self.request.matchdict:
-            NotFound()
         user = db_session.query(User).get(self.request.matchdict['id'])
-        return user.to_json()
+        return user
 
     @view_config(request_method='POST', route_name='users')
     def add_user(self):
-        name = self.request.params.get('name')
-        role = self.request.params.get('role')
-        password_hash = self.request.params.get('password_hash')
-        user = User(name=name, role=role, password_hash=password_hash)
+        user = User(**self.request.POST)
         db_session.add(user)
         db_session.commit()
         return {'id': user.id}
@@ -39,10 +34,7 @@ class UserViews:
         if 'id' not in self.request.matchdict:
             NotFound()
         user = db_session.query(User).filter_by(id=self.request.matchdict['id'])
-        name = self.request.params.get('name')
-        role = self.request.params.get('role')
-        password_hash = self.request.params.get('password_hash')
-        user.update({'name': name, 'role': role, 'password_hash': password_hash})
+        user.update({**self.request.POST})
         db_session.commit()
         return {'id': self.request.matchdict['id']}
 
