@@ -12,5 +12,5 @@ class User(Base):
     role = Column(Text, nullable=False)
     password_hash = Column(Text)
 
-    def to_json(self):
+    def __json__(self, *args, **kwargs):
         return {'id': self.id, 'name': self.name, 'role': self.role, 'password_hash': self.password_hash}
