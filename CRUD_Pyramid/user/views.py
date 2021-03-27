@@ -31,8 +31,6 @@ class UserViews:
 
     @view_config(request_method='PUT', route_name='user')
     def edit_user(self):
-        if 'id' not in self.request.matchdict:
-            NotFound()
         user = db_session.query(User).filter_by(id=self.request.matchdict['id'])
         user.update({**self.request.POST})
         db_session.commit()
@@ -40,8 +38,6 @@ class UserViews:
 
     @view_config(request_method='DELETE', route_name='user')
     def delete_user(self):
-        if 'id' not in self.request.matchdict:
-            NotFound()
         user = db_session.query(User).get(self.request.matchdict['id'])
         db_session.delete(user)
         db_session.commit()

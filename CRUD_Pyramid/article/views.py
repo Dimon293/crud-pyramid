@@ -34,8 +34,6 @@ class ArticleViews:
 
     @view_config(request_method='PUT', route_name='article')
     def edit_article(self):
-        if 'id' not in self.request.matchdict:
-            NotFound()
         article = db_session.query(Article).filter_by(id=self.request.matchdict['id'])
         user_id = self.request.POST.get('user_id')
         if user_id is None or user_id <= 0:
@@ -46,8 +44,6 @@ class ArticleViews:
 
     @view_config(request_method='DELETE', route_name='article')
     def delete_article(self):
-        if 'id' not in self.request.matchdict:
-            NotFound()
         article = db_session.query(Article).get(self.request.matchdict['id'])
         db_session.delete(article)
         db_session.commit()
